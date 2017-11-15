@@ -8,7 +8,9 @@ Denne mappen inneholder følgende;
 
 **Modeller** for et pilotprosjekt som har som formål å predikere utbredelse hos dvergflaggermus og en generell modell for flaggermusdiversitet. Dette er ikke en endelige modeller, men viser noe av potensialet for denne tilnærmingen med et ufullstendig datasett. Ikke alle prediktorvariabler finnes som shape/raster filer pr 2017. Det blir derfor ikke brukt tid på fine-tuning av modellene.
 
-**Prediktorer** som anvendes er knyttet til klima, habitat, topografi og lattitude. Det finnes en egen tekstfil (predictors.txt) som beskriver hva disse står for og hvor de er hentet fra via GIS verktøy. Merk at dette ikke er det endelige settet med prediktorer. Feks har jeg ikke inkludert en generell habitatvariabel - hvilket nok vil hjelpe modellene
+**Prediktorer** som anvendes er knyttet til klima, habitat, topografi og lattitude. Det finnes en egen tekstfil (predictors.txt) som beskriver hva disse står for og hvor de er hentet fra via GIS verktøy. Merk at dette ikke er det endelige settet med prediktorer. Feks har jeg ikke inkludert en generell habitatvariabel - hvilket nok vil hjelpe modellene.
+
+**Kart** Det legges til figurer produsert i QGIS som viser hvor dataene stammer fra. Pr 2017 er det vesentlige geografiske skjevheter med tanke på hvor dataene er samlet inn.
 
 **Merk** altså at dette er en *pilotstudie* og ikke endelige data eller endelige modeller. Jeg har derfor tatt litt lett på enkelte ting. Det endelig datasettet skal inneholde mer enn 400 datapunkt (pr i dag er det 282). Man kan vente vesentlige endringer i forhold til både valg av modeller, variabler og prediksjoner når prosjektet sluttføres i ikke så alt for fjern fremtid.
 
