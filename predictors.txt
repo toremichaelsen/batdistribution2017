@@ -1,10 +1,14 @@
 Prediktorvariabler:
 
 1. North: angir meter nord (fra WGS84 UTM sone 33)(egne data)
-2. hoh_diff: forskjell mellom høyeste og laveste punkt i en 5x5 km rute (data fra NIBIO)
-3. distance.freshwater: avstand til ferskvann (elvenett/hovedelv og innsjø er tilgjengelig fra NVE)
-4. tam_july: middeltemperatur for juli (1985-2014 normal, MET)
-5. tam_jan: middeltemperatur for januar (1985-2014 normal, MET)
-6. rr_jan: midlere nedbør for januar (1985-2014 normal, MET)
-7. rr_july: midlere nedbør for juli (1985-2014 normal, MET)
-8. Vind50: vindstyrke (m/s) ved 50 m over bakken (NVE)
+2. hoh_diff: forskjell mellom hÃ¸yeste og laveste punkt i en 5x5 km rute (data fra NIBIO)
+3. distance.freshwater: avstand til ferskvann (elvenett/hovedelv og innsjÃ¸ er tilgjengelig fra NVE og NIBIOs Landskap i ruter)
+4. tam_july: middeltemperatur for juli (1985-2014 normal, data fra MET)
+5. tam_jan: middeltemperatur for januar (1985-2014 normal, data fra MET)
+6. rr_jan: midlere nedbÃ¸r for januar (1985-2014 normal, data fra MET)
+7. rr_july: midlere nedbÃ¸r for juli (1985-2014 normal, data fra MET)
+8. Vind50: vindstyrke (m/s) ved 50 m over bakken (data fra NVE)
+
+NVE= Norges Vassdrag og Energidirektorat
+MET= Meteorologisk Institutt
+NIBIO= Norsk Institutt for BioÃ¸konomi
