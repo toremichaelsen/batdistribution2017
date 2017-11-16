@@ -12,7 +12,7 @@ Denne mappen inneholder følgende;
 
 **Respons** variabelen er binær (påvist eller ikke påvist). Det finnes en egen tekstfil (*response.txt*) som beskriver variabelen.
 
-**Kart** Det legges til figurer produsert i QGIS som viser hvor dataene stammer fra. Pr 2017 er det vesentlige geografiske skjevheter med tanke på hvor dataene er samlet inn.
+**Kart** Det legges til figurer produsert i QGIS som viser hvor dataene stammer fra. Pr 2017 er det vesentlige geografiske skjevheter med tanke på hvor dataene er samlet inn. Merk at mange av datapunktene ligger nært hverandre og mengde punkt kommer dårlig frem i kartet.
 
 **Merk** altså at dette er en *pilotstudie* og ikke endelige data eller endelige modeller. Jeg har derfor tatt litt lett på enkelte ting. Det endelig datasettet skal inneholde mer enn 400 datapunkt (pr i dag er det 282). Man kan vente vesentlige endringer i forhold til valg av modeller, variabler og prediksjoner når prosjektet sluttføres i ikke så alt for fjern fremtid.
 
