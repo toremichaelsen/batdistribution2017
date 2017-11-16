@@ -1,0 +1,11 @@
+Responsvariabel:
+
+Binær variabel som angir om dvergflaggermus (Pipistrellus pygmaeus) er påvist eller ikke:
+
+true = dvergflaggermus påvist
+false = dvergflaggermus ikke påvist
+
+
+
+
+
