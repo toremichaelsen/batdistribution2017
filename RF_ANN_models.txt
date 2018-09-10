@@ -1,0 +1,136 @@
+######################################################
+#                   Models                           #
+#            Bat distribution 2017                   #
+######################################################
+#
+#Operations
+#Do random forest and neural networks through caret
+#####################################################
+#Has been prepared by:
+#higly corr var removed
+#near zero var removed
+#####################################################
+#Packages
+library(caret)
+#library(randomForest) # rf
+#library(nnet)# neural network
+library(pROC)
+library(PresenceAbsence)
+library(kernlab)
+#####################################################
+# xxxx        Pipistrellus pygmaeus            xxxx #
+#####################################################
+#Data after dummy, near zero var, findcorr (0.85)
+#9 predictors, response last (number 10)
+data<-read.table("clipboard",header=T)
+attach(data)
+str(data)
+#Make response a factor if binary 0-1 (if not, skip)
+data$ppyg<-as.factor(data$ppyg)
+is.factor(data$ppyg)
+str(data)
+####################################################
+#Partition
+set.seed(1933)
+index <- createDataPartition(data$ppyg, p=0.75, list=FALSE)
+train <- data[ index,]
+test <- data[-index,]
+####################################################
+#Pre-process (center, scale, transform)
+set.seed(1934)
+procValues <- preProcess(train[,-10], 
+                         method = c("center", "scale","BoxCox")) # response 10 col
+scaledTraindata <-  predict(procValues, train) #train set
+scaledTestdata <-  predict(procValues, test) #test set
+dim(scaledTraindata)
+dim(scaledTestdata)
+###################################################
+#Training models all, train control
+#control <- trainControl(method="repeatedcv", number=10, repeats=5,classProbs = TRUE)
+#
+################################################################################################
+#1. Random forest
+################################################################################################
+#
+##########################################################################
+#Custom function for search grid (search ntree and mtry)
+set.seed(1936)
+customRF <- list(type = "Classification", library = "randomForest", loop = NULL)
+customRF$parameters <- data.frame(parameter = c("mtry", "ntree"), class = rep("numeric", 2), label = c("mtry", "ntree"))
+customRF$grid <- function(x, y, len = NULL, search = "grid") {}
+customRF$fit <- function(x, y, wts, param, lev, last, weights, classProbs, ...) {
+  randomForest(x, y, mtry = param$mtry, ntree=param$ntree, ...)
+}
+customRF$predict <- function(modelFit, newdata, preProc = NULL, submodels = NULL)
+  predict(modelFit, newdata)
+customRF$prob <- function(modelFit, newdata, preProc = NULL, submodels = NULL)
+  predict(modelFit, newdata, type = "prob")
+customRF$sort <- function(x) x[order(x[,1]),]
+customRF$levels <- function(x) x$classes
+#Go
+metric <- "Accuracy" 
+control <- trainControl(method="repeatedcv", number=10, repeats=3)
+tunegrid <- expand.grid(.mtry=c(1:9), .ntree=c(100 ,200, 300, 400, 500, 600, 700, 800, 900, 1000))
+set.seed(1937)
+rf.fit <- train(ppyg~., 
+                data=scaledTraindata, 
+                method=customRF, 
+                metric=metric, 
+                tuneGrid=tunegrid, 
+                trControl=control)
+summary(rf.fit)
+plot(rf.fit)
+rf.fit 
+varImp(rf.fit)
+varImp(rf.fit,scale=FALSE)
+# Prediction and confusion (training)
+p1 <- predict(rf.fit, scaledTraindata)
+confusionMatrix(p1, scaledTraindata$ppyg, positive="true")
+# Prediction and confusion (test)
+p2 <- predict(rf.fit, scaledTestdata)
+confusionMatrix(p2, scaledTestdata$ppyg, positive="true")
+#Probs
+rf.probs <- predict(rf.fit, scaledTestdata, type="prob")
+rf.probs
+library(pROC)
+auc <- roc(ifelse(scaledTestdata$ppyg=="true",1,0), rf.probs[[2]]) #ROC on test data
+auc
+#Stop
+##############################################################################################
+#2. Neural Networks
+#############################################################################################
+#
+tunegrid.nnet <- expand.grid (.size=1:10, .decay=c(0, .1, 1, 2))
+#Do it with caret lineup
+maxSize<-max(tunegrid.nnet$.size) 
+numWts<-1*(maxSize*(length(scaledTraindata)+1)+maxSize+1)
+control <- trainControl(method="repeatedcv", number=10, repeats=5,classProbs = TRUE)
+set.seed(1948)
+nnet.fit<-train(ppyg~.,
+                data=scaledTraindata,
+                method="nnet",
+                metric="Accuracy",
+                tuneGrid=tunegrid.nnet,
+                trace=FALSE,
+                maxit=2000,
+                MaxNWts=numWts,
+                trControl=control)
+### Show Accuracy with size and decay
+nnet.fit # Show Accuracy with size and decay
+plot(nnet.fit) # Show accuracy with hidden units (size) and decay
+varImp(nnet.fit)
+varImp(nnet.fit,scale=FALSE)
+# Prediction and confusion (training)
+p1 <- predict(nnet.fit, scaledTraindata)
+confusionMatrix(p1, scaledTraindata$ppyg, positive="true")
+# Prediction and confusion (test)
+p2 <- predict(nnet.fit, scaledTestdata)
+confusionMatrix(p2, scaledTestdata$ppyg, positive="true")
+#Probs
+nnet.probs <- predict(nnet.fit, scaledTestdata, type="prob")
+nnet.probs
+library(pROC)
+auc <- roc(ifelse(scaledTestdata$ppyg=="true",1,0), nnet.probs[[2]]) #ROC on test data
+auc
+###
+#Stop
