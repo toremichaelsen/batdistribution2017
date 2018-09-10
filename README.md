@@ -4,9 +4,9 @@ Dette er et prosjekt på utbredelse hos flaggermus i Norge. I denne mappen finne
 ## Innhold
 Denne mappen inneholder følgende;
 
-**Datasett** samlet inn med ultralydlydloggere, med ferdige prediktorvariabler for dvergflaggermus (DataPpyg.csv). Dette er en av mange responsvariabler som etter hvert skal med i analyser. Resten av datasettene gjøres ikke tilgjengelig i 2017.
+**Datasett** samlet inn med ultralydlydloggere, med ferdige prediktorvariabler for dvergflaggermus (*DataPpyg.csv*). Dette er en av mange responsvariabler som etter hvert skal med i analyser. Resten av datasettene gjøres ikke tilgjengelig i 2017.
 
-**Modeller** for et pilotprosjekt som har som formål å predikere utbredelse hos dvergflaggermus. Dette er ikke en endelige modeller, men viser noe av potensialet for denne tilnærmingen med et ufullstendig datasett. Ikke alle prediktorvariabler finnes som shape/raster filer pr 2017. Det blir derfor ikke brukt tid på fine-tuning av modellene. En enkel presentasjon skrevet i Rmarkdown finnes i mappen.
+**Modeller** for et pilotprosjekt som har som formål å predikere utbredelse hos dvergflaggermus (*RF_ANN_modes.txt*). Dette er ikke en endelige modeller, men viser noe av potensialet for denne tilnærmingen med et ufullstendig datasett. Ikke alle prediktorvariabler finnes som shape/raster filer pr 2017. Det blir derfor ikke brukt tid på fine-tuning av modellene. En enkel presentasjon skrevet i Rmarkdown finnes i mappen.
 
 **Prediktorer** som anvendes er knyttet til klima, habitat, topografi og lattitude. Det finnes en egen tekstfil (*predictors.txt*) som beskriver hva disse står for og hvor de er hentet fra via GIS verktøy. Merk at dette ikke er det endelige settet med prediktorer. Feks har jeg ikke inkludert en generell habitatvariabel - hvilket nok vil hjelpe modellene. Det er heller ingen variabel for lysforhold og den må lages (et slikt datasett finnes ikke i shape/raster).
 
